@@ -1,0 +1,32 @@
+{
+  "a91f59cf-32da-4175-bcdc-a0b4848ab2b6": {
+    "appActions": [
+      "providers/PowerPlatform.Governance/Operations/Read",
+      "providers/PowerPlatform.Governance/Operations/Write",
+      "providers/PowerPlatform.Governance/Operations/Delete"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/u/alexsp/sporelease/1.0.1682.3673/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {
+      "https://igodev.sharepoint.com/sites/DEVIGO": {
+        "dataSources": {
+          "DB_ToDoList": {
+            "tableName": "b2d2ba24-5f6c-4d3f-abea-a918cced8ee1"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "DB_ToDoList"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "a91f59cf-32da-4175-bcdc-a0b4848ab2b6"
+  }
+}

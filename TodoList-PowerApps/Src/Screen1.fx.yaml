@@ -1,0 +1,728 @@
+Screen1 As screen:
+
+    Header As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.Regular
+        Fill: =RGBA(204, 231, 246, 1)
+        Height: =71
+        Width: =1366
+        ZIndex: =1
+
+        Label1 As label:
+            Color: =RGBA(0, 94, 146, 1)
+            Text: =User().FullName
+            X: =93
+            Y: =15
+            ZIndex: =1
+
+        Label1_1 As label:
+            Color: =RGBA(0, 121, 187, 1)
+            Font: =Font.'Lato Black'
+            Height: =71
+            Size: =25
+            Text: ="To Do List"
+            Width: =206
+            X: =1159
+            ZIndex: =2
+
+        "Foto As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+            DelayItemLoading: =true
+            Height: =60
+            Items: =DB_ToDoList
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            ShowScrollbar: =false
+            TemplatePadding: =0
+            TemplateSize: =60
+            Width: =60
+            X: =28
+            Y: =3
+            ZIndex: =4
+
+            Image5 As image:
+                Height: =60
+                Image: =
+                OnSelect: =Select(Parent)
+                RadiusBottomLeft: =8
+                RadiusBottomRight: =8
+                RadiusTopLeft: =8
+                RadiusTopRight: =8
+                Width: =60
+                ZIndex: =1
+
+        Icon8 As icon.CancelBadge:
+            Color: =RGBA(184, 0, 0, 1)
+            Height: =20
+            Icon: =Icon.CancelBadge
+            OnSelect: |-
+                =UpdateContext({Editarfoto:false});
+                Reset(AddMediaButton1)
+            Visible: =If(AlterarFoto.Visible = true,true,false)
+            Width: =20
+            X: =73
+            Y: =48
+            ZIndex: =6
+
+        Image6 As image:
+            Height: =50
+            Image: ='WhatsApp Image 2023-07-05 at 21.48.06'
+            OnSelect: =
+            RadiusBottomLeft: =100
+            RadiusBottomRight: =100
+            RadiusTopLeft: =100
+            RadiusTopRight: =100
+            Width: =50
+            X: =33
+            Y: =13
+            ZIndex: =7
+
+        AltFoto As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =7
+
+            Button2 As button:
+                BorderColor: =
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =0
+                Color: =RGBA(0, 0, 0, 0)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(0, 0, 0, 0)
+                DisabledFill: =RGBA(255, 255, 255, 1)
+                DisplayMode: =DisplayMode.Disabled
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =20
+                Text: =""
+                Visible: |-
+                    =//If(AlterarFoto.Visible = true;false;true)
+                    false
+                Width: =20
+                X: =73
+                Y: =48
+                ZIndex: =3
+
+            Icon5 As icon.Edit:
+                Color: =RGBA(99, 139, 44, 1)
+                DisabledBorderColor: =RGBA(127, 178, 57, 1)
+                Height: =10
+                Icon: =Icon.Edit
+                OnSelect: |-
+                    =UpdateContext({Editarfoto:true,ItemFoto:Foto.Selected});
+                    Reset(AddMediaButton1)
+                Tooltip: ="Alterar foto"
+                Visible: |-
+                    =//If(AlterarFoto.Visible = true;false;true)
+                    false
+                Width: =10
+                X: =78
+                Y: =53
+                ZIndex: =5
+
+    Footer As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(204, 231, 246, 1)
+        Height: =48
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Width: =1366
+        Y: =720
+        ZIndex: =2
+
+        Label5 As label:
+            Align: =Align.Center
+            Font: =Font.Lato
+            Height: =48
+            LineHeight: =2
+            Size: =12
+            Text: ="Copy 2023 DR Cursos"
+            Width: =372
+            X: =528
+            ZIndex: =1
+
+    Conteudo As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(204, 231, 246, 0.17)
+        Height: =649
+        Width: =1366
+        Y: =71
+        ZIndex: =3
+
+        Cont_add As groupContainer.manualLayoutContainer:
+            DropShadow: =DropShadow.None
+            Height: =649
+            Width: =562
+            ZIndex: =1
+
+            InserirTarefa As text:
+                BorderThickness: =0.5
+                Default: =""
+                Font: =Font.Lato
+                Height: =45
+                HintText: ="Digite a sua tarefa *"
+                Size: =12
+                Width: =510
+                X: =30
+                Y: =300
+                ZIndex: =2
+
+            Titulo As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =5
+
+                Label2 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(39, 67, 125, 1)
+                    Font: =Font.Lato
+                    FontWeight: =FontWeight.Bold
+                    Size: =15
+                    Text: ="Digite sua tarefa e adicione a sua lista"
+                    Width: =368
+                    X: =55
+                    Y: =210
+                    ZIndex: =1
+
+                Image2 As image:
+                    Image: =list
+                    X: =415
+                    Y: =180
+                    ZIndex: =4
+
+            Adicionar As button:
+                DisplayMode: =If(IsBlank(InserirTarefa.Text) || IsBlank(Hora.Selected)|| IsBlank(Min.Selected), DisplayMode.Disabled,DisplayMode.Edit)
+                Fill: =RGBA(50, 86, 160, 1)
+                HoverBorderColor: =
+                OnSelect: |+
+                    =With({
+                        HORARIO:Concatenate(Hora.Selected.Value, ":", Min.Selected.Value)
+                    },
+                    
+                    Patch( DB_ToDoList,Defaults(DB_ToDoList),
+                    {
+                        TarefasList:InserirTarefa.Text,
+                        Hora:HORARIO
+                    }
+                        
+                    ));
+                    
+                    Notify("Tarefa adicionada com sucesso! ✅",NotificationType.Success,1000);
+                    
+                    Reset(InserirTarefa); Reset(Hora);Reset(Min);
+                    
+                    Refresh(DB_ToDoList);
+                    
+                    UpdateContext({_ImgList:false})
+                    
+                PressedBorderColor: =
+                PressedFill: =RGBA(136, 160, 209, 1)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Text: ="Adicionar ✅"
+                X: =367
+                Y: =398
+                ZIndex: =6
+
+            Min As dropdown:
+                BorderColor: =RGBA(0, 121, 187, 1)
+                BorderThickness: =0.5
+                ChevronBackground: =RGBA(0, 0, 0, 0)
+                ChevronFill: =RGBA(0, 121, 187, 1)
+                Default: =
+                Items: =["00","05","10","15","20","25","30","35","40","45","50","55"]
+                Tooltip: =
+                Width: =77
+                X: =118
+                Y: =398
+                ZIndex: =8
+
+            Hora As dropdown:
+                BorderColor: =RGBA(0, 121, 187, 1)
+                BorderThickness: =0.5
+                ChevronBackground: =RGBA(0, 0, 0, 0)
+                ChevronFill: =RGBA(0, 121, 187, 1)
+                Default: =
+                Items: =["00","01","02","03","04","05","06","07","08","09","10","11","11","12","13","14","15","16","17","18","19","21","22","23"]
+                Width: =71
+                X: =30
+                Y: =398
+                ZIndex: =9
+
+            Label6 As label:
+                Font: =Font.'Lato Black'
+                Height: =50
+                Size: =15
+                Text: |-
+                    =":"
+                Width: =21
+                X: =101
+                Y: =393
+                ZIndex: =10
+
+            Label9 As label:
+                Text: ="Horário"
+                X: =30
+                Y: =358
+                ZIndex: =11
+
+        Cont_lista As groupContainer.manualLayoutContainer:
+            DropShadow: =DropShadow.None
+            Height: =649
+            Width: =778
+            X: =588
+            ZIndex: =2
+
+            Image3 As image:
+                Height: =415
+                Image: =fundo
+                Visible: =If( Adicionar.DisplayMode = DisplayMode.Disabled || GalleryLista.Valid = true, false,true)
+                Width: =413
+                X: =176
+                Y: =92
+                ZIndex: =1
+
+            Lista As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.Regular
+                Height: =520
+                Visible: =If(CountRows(GalleryLista.AllItems) >= 1,true,false)
+                Width: =754
+                X: =5
+                Y: =67
+                ZIndex: =3
+
+                GalleryLista As gallery.galleryVertical:
+                    BorderStyle: =BorderStyle.None
+                    DelayItemLoading: =true
+                    Height: =423
+                    Items: |-
+                        =
+                        Sort(
+                            With({_source:DB_ToDoList, _textWithOutAcentuation: Lower(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Txt_Buscar.Text," ",""),"-",""),"À","A"),"Â","A"),"Á","A"),"Ç","C"),"È","E"),"É","E"),"Ê","E"),"É","E"),"Î","I"),"Í","I"),"Ô","O"),"Ó","O"),"Ù","U"),"Û","U"),"Ú","U"),"à","a"),"â","a"),"á","a"),"ã","a"),"ç","c"),"è","e"),"é","e"),"ê","e"),"é","e"),"î","i"),"í","i"),"ô","o"),"ó","o"),"õ","o"),"ù","u"),"û","u"),"ú","u"))
+                            },
+                            Sort(Filter(DB_ToDoList,_textWithOutAcentuation in Lower(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(Substitute(ThisRecord.TarefasList," ",""),"-",""),"À","A"),"Â","A"),"Á","A"),"Ç","C"),"È","E"),"É","E"),"Ê","E"),"É","E"),"Î","I"),"Í","I"),"Ô","O"),"Ó","O"),"Ù","U"),"Û","U"),"Ú","U"),"à","a"),"â","a"),"á","a"),"ã","a"),"ç","c"),"è","e"),"é","e"),"ê","e"),"é","e"),"î","i"),"í","i"),"ô","o"),"ó","o"),"õ","o"),"ù","u"),"û","u"),"ú","u")) || Txt_Buscar.Text in ThisRecord.TarefasList), SortOrder.Descending)),TarefasList,SortOrder.Ascending)
+                    Layout: =Layout.Vertical
+                    LoadingSpinner: =LoadingSpinner.Data
+                    ShowNavigation: =true
+                    ShowScrollbar: =false
+                    TemplatePadding: =20
+                    TemplateSize: =46
+                    Width: =754
+                    Y: =40
+                    ZIndex: =1
+
+                    Container5 As groupContainer.manualLayoutContainer:
+                        ContentLanguage: =
+                        DropShadow: =DropShadow.None
+                        Height: =58
+                        Width: =234
+                        X: =47
+                        ZIndex: =1
+
+                        Label3 As label:
+                            Color: =If(Checkbox1.Value = true &&  BtnStatus.Text = "Concluído" ,Color.Red,Color.Black)
+                            Height: =44
+                            PaddingLeft: =10
+                            Strikethrough: =If(Checkbox1.Value  = true &&  BtnStatus.Text = "Concluído",true,false)
+                            Text: =ThisItem.TarefasList
+                            Width: =233
+                            ZIndex: =1
+
+                    Status As groupContainer.manualLayoutContainer:
+                        ContentLanguage: =ThisItem.StatusTarefa.Value
+                        DropShadow: =DropShadow.Semilight
+                        Height: =30
+                        Width: =221
+                        X: =396
+                        Y: =9
+                        ZIndex: =2
+
+                        BtnStatus As button:
+                            BorderStyle: =BorderStyle.None
+                            Color: |-
+                                =If(Checkbox1.Value = true,ColorValue("#73A62D"))
+                            DisabledColor: =
+                            DisabledFill: |-
+                                =Switch(BtnStatus.Text,
+                                
+                                    "Em andamento",ColorValue("#FFEF75"),
+                                    "Pendente", ColorValue("#FF7A7A"),
+                                    "Concluído",ColorValue("#D1E8B2")
+                                    )
+                            DisplayMode: =DisplayMode.Disabled
+                            Fill: =RGBA(255, 239, 117, 1)
+                            Height: =30
+                            HoverBorderColor: =
+                            HoverColor: =RGBA(0, 0, 0, 0)
+                            HoverFill: =
+                            PressedBorderColor: =
+                            PressedColor: =
+                            PressedFill: =
+                            RadiusBottomLeft: =4
+                            RadiusBottomRight: =4
+                            RadiusTopLeft: =4
+                            RadiusTopRight: =4
+                            Text: |
+                                =If(Checkbox1.Value = true,"Concluído",ThisItem.StatusTarefa.Value)
+                            Width: =Parent.Width
+                            ZIndex: =1
+
+                    Icon1 As icon.CancelBadge:
+                        Color: =RGBA(168, 0, 0, 1)
+                        Height: =35
+                        Icon: =Icon.CancelBadge
+                        OnSelect: =RemoveIf(DB_ToDoList, ThisItem.ID = ID)
+                        Width: =30
+                        X: =675
+                        Y: =5
+                        ZIndex: =3
+
+                    Checkbox1 As checkbox:
+                        BorderColor: =RGBA(136, 160, 209, 1)
+                        BorderStyle: =BorderStyle.None
+                        CheckboxBorderColor: =RGBA(50, 86, 160, 1)
+                        Color: =RGBA(136, 160, 209, 1)
+                        Default: =ThisItem in Selecao
+                        Height: =37
+                        OnCheck: =Collect(Selecao,ThisItem)
+                        OnSelect: =
+                        OnUncheck: =Remove(Selecao,ThisItem)
+                        Text: =""
+                        Width: =43
+                        X: =4
+                        Y: =3
+                        ZIndex: =4
+
+                    Icon2 As icon.Edit:
+                        Color: =RGBA(127, 178, 57, 1)
+                        Height: =30
+                        Icon: =Icon.Edit
+                        OnSelect: |-
+                            =Select(Parent);
+                            UpdateContext({ContEdicao:true, ItemEditar:ThisItem})
+                        Width: =30
+                        X: =628
+                        Y: =10
+                        ZIndex: =5
+
+                    Container5_2 As groupContainer.manualLayoutContainer:
+                        ContentLanguage: =
+                        DropShadow: =DropShadow.None
+                        Height: =58
+                        Width: =96
+                        X: =289
+                        ZIndex: =6
+
+                        horario As label:
+                            Align: =Align.Center
+                            Color: =If(Checkbox1.Value = true && BtnStatus.Text = "Concluído" ,Color.Red,Color.Black)
+                            Height: =43
+                            PaddingLeft: =10
+                            Strikethrough: =If(Checkbox1.Value = true && BtnStatus.Text = "Concluído" ,true,false)
+                            Text: =ThisItem.Hora
+                            Width: =96
+                            ZIndex: =1
+
+                Label8 As label:
+                    Font: =Font.'Lato Black'
+                    FontWeight: =FontWeight.Bold
+                    Text: ="Tarefa"
+                    X: =65
+                    ZIndex: =2
+
+                Label8_1 As label:
+                    Font: =Font.'Lato Black'
+                    FontWeight: =FontWeight.Bold
+                    Text: ="Horário"
+                    Width: =76
+                    X: =322
+                    ZIndex: =3
+
+                Label8_2 As label:
+                    Font: =Font.'Lato Black'
+                    FontWeight: =FontWeight.Bold
+                    Text: ="Status"
+                    Width: =76
+                    X: =485
+                    ZIndex: =4
+
+                Checkbox2 As checkbox:
+                    OnCheck: =ClearCollect(Selecao,DB_ToDoList)
+                    OnUncheck: =
+                    Text: ="Selecionar todos"
+                    Visible: |
+                        =false
+                    Width: =215
+                    X: =32
+                    Y: =463
+                    ZIndex: =5
+
+            Filtro As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.Semilight
+                Height: =44
+                Visible: =_Pesquisar
+                Width: =365
+                X: =77
+                Y: =12
+                ZIndex: =5
+
+                Txt_Buscar As text:
+                    BorderColor: =RGBA(102, 182, 227, 1)
+                    BorderThickness: =0.5
+                    Default: =""
+                    Height: =44
+                    HintText: ="Buscar tarefa"
+                    HoverBorderColor: =RGBA(167, 182, 203, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Width: =365
+                    ZIndex: =1
+
+            Icon4 As icon.Search:
+                Color: =RGBA(0, 121, 187, 1)
+                DisabledColor: =RGBA(0, 94, 146, 1)
+                Height: =30
+                Icon: =Icon.Search
+                OnSelect: |-
+                    =UpdateContext({_Pesquisar:true,_CancelarProcurar:true, _lupa:false})
+                Visible: =If(Filtro.Visible = true, false,true)
+                Width: =30
+                X: =32
+                Y: =19
+                ZIndex: =6
+
+            "'cancelar filtro' As icon.Cancel":
+                Color: =RGBA(151, 0, 0, 1)
+                Height: =30
+                Icon: =Icon.Cancel
+                OnSelect: |-
+                    =UpdateContext({_lupa:true,_Pesquisar:false,_CancelarProcurar:false});
+                    Reset(Txt_Buscar)
+                Visible: |
+                    =_CancelarProcurar
+                Width: =30
+                X: =32
+                Y: =19
+                ZIndex: =7
+
+            Image1 As image:
+                Height: =402
+                Image: =fundo
+                Visible: =If(CountRows(GalleryLista.AllItems) >= 1,false,true)
+                Width: =416
+                X: =190
+                Y: =126
+                ZIndex: =8
+
+    ContEditar As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(149, 149, 149, 0.4)
+        Height: =768
+        Visible: =ContEdicao
+        Width: =1366
+        ZIndex: =4
+
+        ContEditarInt As groupContainer.manualLayoutContainer:
+            DropShadow: =DropShadow.Regular
+            Fill: =RGBA(241, 244, 249, 1)
+            Height: =426
+            Visible: |
+                =true
+            Width: =864
+            X: =236
+            Y: =144
+            ZIndex: =1
+
+            Label4 As label:
+                Align: =Align.Center
+                Font: =Font.'Lato Black'
+                FontWeight: =FontWeight.Bold
+                Size: =20
+                Text: ="EDITAR TAREFA"
+                Width: =231
+                X: =316
+                Y: =32
+                ZIndex: =1
+
+            Icon6 As icon.CancelBadge:
+                Color: =RGBA(151, 0, 0, 1)
+                Height: =30
+                Icon: =Icon.CancelBadge
+                OnSelect: |-
+                    =UpdateContext({ContEdicao:false})
+                Width: =30
+                X: =795
+                Y: =32
+                ZIndex: =2
+
+            Button1 As button:
+                BorderColor: =RGBA(99, 139, 44, 1)
+                BorderThickness: =0.5
+                Color: =RGBA(99, 139, 44, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                HoverFill: =
+                OnSelect: |-
+                    =Patch(
+                        DB_ToDoList,
+                        {
+                            ID:ItemEditar.ID,
+                            TarefasList: TxtEditartarefa.Text,
+                            Hora: TxtEditarHora.Text,
+                            StatusTarefa: ComboEditarStatus.Selected
+                        }
+                    );
+                    Notify(
+                        "Tarefa Editada com sucesso! ✅",
+                        NotificationType.Success,
+                        2000
+                    );
+                    Refresh(DB_ToDoList);
+                    UpdateContext({ContEdicao: false})
+                PressedFill: =RGBA(209, 232, 178, 1)
+                Text: ="Editar"
+                Width: =219
+                X: =590
+                Y: =340
+                ZIndex: =4
+
+            TxtEditartarefa As text:
+                BorderColor: =RGBA(0, 121, 187, 1)
+                BorderThickness: =0.5
+                Color: =RGBA(0, 94, 146, 1)
+                Default: =GalleryLista.Selected.TarefasList
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                X: =63
+                Y: =122
+                ZIndex: =5
+
+            TxtEditarHora As text:
+                BorderColor: =RGBA(0, 121, 187, 1)
+                BorderThickness: =0.5
+                Color: =RGBA(0, 94, 146, 1)
+                Default: =GalleryLista.Selected.Hora
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                X: =456
+                Y: =122
+                ZIndex: =6
+
+            ComboEditarStatus As combobox:
+                BorderColor: =RGBA(0, 121, 187, 1)
+                BorderThickness: =0.5
+                ChevronBackground: =RGBA(102, 182, 227, 1)
+                DefaultSelectedItems: =
+                DisplayFields: =["Value"]
+                IsSearchable: =false
+                Items: =Choices([@DB_ToDoList].StatusTarefa)
+                SearchFields: =["Value"]
+                SearchItems: =[]
+                SelectMultiple: =false
+                X: =55
+                Y: =219
+                ZIndex: =7
+
+            Label7 As label:
+                Text: ="Tarefa"
+                X: =63
+                Y: =82
+                ZIndex: =8
+
+            Label7_1 As label:
+                Text: ="Horário"
+                X: =456
+                Y: =82
+                ZIndex: =9
+
+            Label7_2 As label:
+                Text: ="Status"
+                X: =55
+                Y: =179
+                ZIndex: =10
+
+    AlterarFoto As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.Regular
+        Fill: =RGBA(204, 231, 246, 1)
+        Height: =169
+        Visible: =Editarfoto
+        Width: =175
+        X: =65
+        Y: =71
+        ZIndex: =5
+
+        Img As image:
+            Height: =75
+            Image: =If(IsBlank(AddMediaButton1.Media), SampleImage, AddMediaButton1.Media)
+            ImagePosition: =ImagePosition.Fill
+            RadiusBottomLeft: =100
+            RadiusBottomRight: =100
+            RadiusTopLeft: =100
+            RadiusTopRight: =100
+            Visible: =If(AddMediaButton1.Media = AddMediaButton1.Media,true,false)
+            Width: =75
+            X: =49
+            Y: =18
+            ZIndex: =1
+
+        Icon10 As icon.Save:
+            Color: =RGBA(99, 139, 44, 1)
+            Height: =20
+            Icon: =Icon.Save
+            OnSelect: |-
+                =Set(VarImgAlt,Substitute(JSON(Img.Image,JSONFormat.IncludeBinaryData),Char(34),""));
+                
+                Patch(DB_ToDoList,
+                    
+                    {
+                        ID:ItemFoto.ID,
+                        FotoURI:AddMediaButton1
+                    });
+                
+                    Notify("Foto alterada com sucesso!", NotificationType.Success,1500)
+            Width: =20
+            X: =142
+            Y: =138
+            ZIndex: =5
+
+        addfoto As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =5
+
+            Icon7 As icon.Add:
+                Color: =RGBA(0, 121, 187, 1)
+                Height: =36
+                Icon: =Icon.Add
+                Width: =36
+                X: =68
+                Y: =102
+                ZIndex: =2
+
+            AddMediaButton1 As addMedia:
+                BorderStyle: =BorderStyle.None
+                ChangePictureText: =""
+                Height: =36
+                HoverBorderColor: =
+                HoverColor: =
+                PressedBorderColor: =
+                PressedColor: =
+                Size: =25
+                Text: =""
+                Width: =36
+                X: =68
+                Y: =102
+                ZIndex: =3
+
